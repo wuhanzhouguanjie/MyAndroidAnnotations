@@ -12,21 +12,21 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:hint="随便写点什么"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
-        android:text="点我" 
+        android:text="天气模块" 
         android:textColor="@android:color/black"/>
 
     <TextView
         android:id="@+id/tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="这里将改变" 
         android:textColor="@android:color/black"/>
 
 </LinearLayout>

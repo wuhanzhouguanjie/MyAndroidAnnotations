@@ -9,19 +9,36 @@
         android:targetSdkVersion="21" />
 
     <application
+        android:name="com.example.application.BaseApplication_"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity_"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:theme="@style/FeelyouWindowAnimTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        
+        <activity 
+            android:name="com.example.activity.WeatherActivity_"
+            android:theme="@style/FeelyouWindowAnimTheme"
+            android:screenOrientation="portrait"></activity>
+        
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
 </manifest>

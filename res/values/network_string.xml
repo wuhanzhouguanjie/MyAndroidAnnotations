@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="weather_url">http://apis.baidu.com/heweather/weather/free</string>
+    <string name="weather_apikey">8019ff912bd7b3dcbc378504abdeb265</string>
+</resources>
