@@ -4,7 +4,7 @@
 //
 
 
-package com.example.myandroidannotations;
+package com.example.activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,8 +12,10 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import com.baidu.mapapi.map.MapView;
 import com.example.myandroidannotations.R.id;
 import com.example.myandroidannotations.R.layout;
 import org.androidannotations.api.builder.ActivityIntentBuilder;
@@ -21,8 +23,8 @@ import org.androidannotations.api.view.HasViews;
 import org.androidannotations.api.view.OnViewChangedListener;
 import org.androidannotations.api.view.OnViewChangedNotifier;
 
-public final class MainActivity_
-    extends MainActivity
+public final class BaiduMapActivity_
+    extends BaiduMapActivity
     implements HasViews, OnViewChangedListener
 {
 
@@ -34,7 +36,7 @@ public final class MainActivity_
         init_(savedInstanceState);
         super.onCreate(savedInstanceState);
         OnViewChangedNotifier.replaceNotifier(previousNotifier);
-        setContentView(layout.activity_main);
+        setContentView(layout.activity_baidumap);
     }
 
     private void init_(Bundle savedInstanceState) {
@@ -59,60 +61,35 @@ public final class MainActivity_
         onViewChangedNotifier_.notifyViewChanged(this);
     }
 
-    public static MainActivity_.IntentBuilder_ intent(Context context) {
-        return new MainActivity_.IntentBuilder_(context);
+    public static BaiduMapActivity_.IntentBuilder_ intent(Context context) {
+        return new BaiduMapActivity_.IntentBuilder_(context);
     }
 
-    public static MainActivity_.IntentBuilder_ intent(Fragment supportFragment) {
-        return new MainActivity_.IntentBuilder_(supportFragment);
+    public static BaiduMapActivity_.IntentBuilder_ intent(Fragment supportFragment) {
+        return new BaiduMapActivity_.IntentBuilder_(supportFragment);
     }
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        {
-            View view = hasViews.findViewById(id.toMap);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        MainActivity_.this.toMap();
-                    }
-
-                }
-                );
-            }
-        }
-        {
-            View view = hasViews.findViewById(id.toWeather);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        MainActivity_.this.toWeather();
-                    }
-
-                }
-                );
-            }
-        }
+        mBtnPre = ((Button) hasViews.findViewById(id.mBtnPre));
+        map = ((MapView) hasViews.findViewById(id.map));
+        mBtnNext = ((Button) hasViews.findViewById(id.mBtnNext));
+        preAndNext = ((LinearLayout) hasViews.findViewById(id.preAndNext));
+        init();
     }
 
     public static class IntentBuilder_
-        extends ActivityIntentBuilder<MainActivity_.IntentBuilder_>
+        extends ActivityIntentBuilder<BaiduMapActivity_.IntentBuilder_>
     {
 
         private Fragment fragmentSupport_;
 
         public IntentBuilder_(Context context) {
-            super(context, MainActivity_.class);
+            super(context, BaiduMapActivity_.class);
         }
 
         public IntentBuilder_(Fragment fragment) {
-            super(fragment.getActivity(), MainActivity_.class);
+            super(fragment.getActivity(), BaiduMapActivity_.class);
             fragmentSupport_ = fragment;
         }
 

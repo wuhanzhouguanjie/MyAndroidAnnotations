@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:background="@android:color/white" >
+    android:background="@drawable/main_background" >
 
-    <EditText
-        android:id="@+id/et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:hint="随便写点什么"
-        android:textColor="@android:color/black"
-        android:visibility="gone" />
 
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/toWeather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:text="天气模块" 
-        android:textColor="@android:color/black"/>
-
-    <TextView
-        android:id="@+id/tv"
+        android:text="@string/weather_module" 
+        android:textColor="@android:color/black"
+        android:layout_centerInParent="true"
+        android:background="@drawable/rounded_blue_btn"
+        android:gravity="center"/>
+    
+	<Button
+	    android:layout_below="@id/toWeather"
+        android:id="@+id/toMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"/>
+        android:text="@string/map_module" 
+        android:textColor="@android:color/black"
+        android:background="@drawable/rounded_blue_btn"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>    
 
-</LinearLayout>
+
+</RelativeLayout>

@@ -5,7 +5,6 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.ViewsById;
 import org.androidannotations.annotations.res.StringRes;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +16,7 @@ import com.example.myandroidannotations.R;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -50,7 +50,7 @@ public class WeatherActivity extends Activity{
 	
 	//穿衣建议，运动建议父布局
 	@ViewById
-	LinearLayout drsgLin,sportLin;
+	LinearLayout drsgLin,sportLin,qltyLin,pm25Lin;
 	
 	@StringRes(R.string.search_city_failed)
 	String searchCityFailed;
@@ -60,6 +60,14 @@ public class WeatherActivity extends Activity{
 	
 	@Click
 	void btn() {
+		
+		InputMethodManager imm = (InputMethodManager)getSystemService(this.INPUT_METHOD_SERVICE);  
+		//得到InputMethodManager的实例
+		if (imm.isActive()) {
+		//如果开启
+		imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS); 
+		//关闭软键盘，开启方法相同，这个方法是切换开启与关闭状态的
+		}
 		setProgressBarIndeterminateVisibility(true);
 		someBackgroundWork("weather", 1);
 
@@ -76,12 +84,11 @@ public class WeatherActivity extends Activity{
     void updateUi(String result) {
         setProgressBarIndeterminateVisibility(false);
         if( result == null ){
+        	lin.setVisibility(View.GONE);
         	Toast.makeText(getApplicationContext(), searchFailed, Toast.LENGTH_SHORT).show();
         	return;
         }
-        lin.setVisibility(View.VISIBLE);
         saxJson(result);
-		Log.e("城市", PinyingUtil.hanziToPinyin(et.getText().toString(),""));
     }
 	
 	private void saxJson(String result){
@@ -90,16 +97,22 @@ public class WeatherActivity extends Activity{
 			JSONObject json = new JSONObject(result);
 			JSONObject jsonInfo = (JSONObject) json.getJSONArray("HeWeather data service 3.0").get(0);
 			if( jsonInfo.getString("status").equals("ok") ){
+				lin.setVisibility(View.VISIBLE);
 				city.setText(jsonInfo.getJSONObject("basic").getString("city"));
 				fl.setText(jsonInfo.getJSONObject("now").getString("fl"));
 				cond.setText(jsonInfo.getJSONObject("now").getJSONObject("cond").getString("txt"));
-				pm25.setText(jsonInfo.getJSONObject("aqi").getJSONObject("city").getString("pm25"));
-				qlty.setText(jsonInfo.getJSONObject("aqi").getJSONObject("city").getString("qlty"));
 				
 				//国外城市没有,因此做异常判断
 				try{
 					drsgLin.setVisibility(View.VISIBLE);
 					sportLin.setVisibility(View.VISIBLE);
+					qltyLin.setVisibility(View.VISIBLE);
+					pm25Lin.setVisibility(View.VISIBLE);
+					
+					pm25.setText(jsonInfo.getJSONObject("aqi").getJSONObject("city").getString("pm25"));
+					
+					qlty.setText(jsonInfo.getJSONObject("aqi").getJSONObject("city").getString("qlty"));
+					
 					drsg.setText(jsonInfo.getJSONObject("suggestion").getJSONObject("drsg").getString("brf") 
 							+ "\n"
 							+ jsonInfo.getJSONObject("suggestion").getJSONObject("drsg").getString("txt"));
@@ -110,9 +123,12 @@ public class WeatherActivity extends Activity{
 				}catch(Exception e){
 					drsgLin.setVisibility(View.GONE);
 					sportLin.setVisibility(View.GONE);
+					qltyLin.setVisibility(View.GONE);
+					pm25Lin.setVisibility(View.GONE);
 				}
 				
 			}else{
+				lin.setVisibility(View.GONE);
 				Toast.makeText(getApplicationContext(), searchCityFailed, Toast.LENGTH_SHORT).show();
 			}
 			

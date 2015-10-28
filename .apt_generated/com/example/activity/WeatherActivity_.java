@@ -81,17 +81,19 @@ public final class WeatherActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        sportLin = ((LinearLayout) hasViews.findViewById(id.sportLin));
-        city = ((TextView) hasViews.findViewById(id.city));
-        qlty = ((TextView) hasViews.findViewById(id.qlty));
-        drsgLin = ((LinearLayout) hasViews.findViewById(id.drsgLin));
-        pm25 = ((TextView) hasViews.findViewById(id.pm25));
-        drsg = ((TextView) hasViews.findViewById(id.drsg));
-        cond = ((TextView) hasViews.findViewById(id.cond));
-        sport = ((TextView) hasViews.findViewById(id.sport));
-        fl = ((TextView) hasViews.findViewById(id.fl));
         lin = ((LinearLayout) hasViews.findViewById(id.lin));
+        cond = ((TextView) hasViews.findViewById(id.cond));
         et = ((EditText) hasViews.findViewById(id.et));
+        pm25Lin = ((LinearLayout) hasViews.findViewById(id.pm25Lin));
+        fl = ((TextView) hasViews.findViewById(id.fl));
+        pm25 = ((TextView) hasViews.findViewById(id.pm25));
+        qltyLin = ((LinearLayout) hasViews.findViewById(id.qltyLin));
+        sportLin = ((LinearLayout) hasViews.findViewById(id.sportLin));
+        qlty = ((TextView) hasViews.findViewById(id.qlty));
+        drsg = ((TextView) hasViews.findViewById(id.drsg));
+        drsgLin = ((LinearLayout) hasViews.findViewById(id.drsgLin));
+        sport = ((TextView) hasViews.findViewById(id.sport));
+        city = ((TextView) hasViews.findViewById(id.city));
         {
             View view = hasViews.findViewById(id.btn);
             if (view!= null) {
