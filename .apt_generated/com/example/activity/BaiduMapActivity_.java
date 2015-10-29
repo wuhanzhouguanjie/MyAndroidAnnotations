@@ -71,10 +71,10 @@ public final class BaiduMapActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
+        preAndNext = ((LinearLayout) hasViews.findViewById(id.preAndNext));
+        mBtnNext = ((Button) hasViews.findViewById(id.mBtnNext));
         mBtnPre = ((Button) hasViews.findViewById(id.mBtnPre));
         map = ((MapView) hasViews.findViewById(id.map));
-        mBtnNext = ((Button) hasViews.findViewById(id.mBtnNext));
-        preAndNext = ((LinearLayout) hasViews.findViewById(id.preAndNext));
         init();
     }
 

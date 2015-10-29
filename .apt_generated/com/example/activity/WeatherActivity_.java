@@ -49,8 +49,8 @@ public final class WeatherActivity_
     private void init_(Bundle savedInstanceState) {
         OnViewChangedNotifier.registerOnViewChangedListener(this);
         Resources resources_ = this.getResources();
-        searchCityFailed = resources_.getString(string.search_city_failed);
         searchFailed = resources_.getString(string.search_failed);
+        searchCityFailed = resources_.getString(string.search_city_failed);
     }
 
     @Override
@@ -81,19 +81,19 @@ public final class WeatherActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        lin = ((LinearLayout) hasViews.findViewById(id.lin));
-        cond = ((TextView) hasViews.findViewById(id.cond));
-        et = ((EditText) hasViews.findViewById(id.et));
-        pm25Lin = ((LinearLayout) hasViews.findViewById(id.pm25Lin));
-        fl = ((TextView) hasViews.findViewById(id.fl));
-        pm25 = ((TextView) hasViews.findViewById(id.pm25));
-        qltyLin = ((LinearLayout) hasViews.findViewById(id.qltyLin));
-        sportLin = ((LinearLayout) hasViews.findViewById(id.sportLin));
-        qlty = ((TextView) hasViews.findViewById(id.qlty));
         drsg = ((TextView) hasViews.findViewById(id.drsg));
+        pm25 = ((TextView) hasViews.findViewById(id.pm25));
         drsgLin = ((LinearLayout) hasViews.findViewById(id.drsgLin));
         sport = ((TextView) hasViews.findViewById(id.sport));
         city = ((TextView) hasViews.findViewById(id.city));
+        qltyLin = ((LinearLayout) hasViews.findViewById(id.qltyLin));
+        lin = ((LinearLayout) hasViews.findViewById(id.lin));
+        fl = ((TextView) hasViews.findViewById(id.fl));
+        sportLin = ((LinearLayout) hasViews.findViewById(id.sportLin));
+        qlty = ((TextView) hasViews.findViewById(id.qlty));
+        pm25Lin = ((LinearLayout) hasViews.findViewById(id.pm25Lin));
+        cond = ((TextView) hasViews.findViewById(id.cond));
+        et = ((EditText) hasViews.findViewById(id.et));
         {
             View view = hasViews.findViewById(id.btn);
             if (view!= null) {

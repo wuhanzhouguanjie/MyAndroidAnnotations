@@ -14,6 +14,9 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import com.example.myandroidannotations.R.id;
 import com.example.myandroidannotations.R.layout;
 import org.androidannotations.api.builder.ActivityIntentBuilder;
@@ -69,36 +72,36 @@ public final class MainActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        {
-            View view = hasViews.findViewById(id.toMap);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
+        textMap = ((TextView) hasViews.findViewById(id.textMap));
+        textWeather = ((TextView) hasViews.findViewById(id.textWeather));
+        titlebar = ((RelativeLayout) hasViews.findViewById(id.titlebar));
+        toMap = ((Button) hasViews.findViewById(id.toMap));
+        toWeather = ((Button) hasViews.findViewById(id.toWeather));
+        if (toMap!= null) {
+            toMap.setOnClickListener(new OnClickListener() {
 
 
-                    @Override
-                    public void onClick(View view) {
-                        MainActivity_.this.toMap();
-                    }
-
+                @Override
+                public void onClick(View view) {
+                    MainActivity_.this.toMap();
                 }
-                );
+
             }
+            );
         }
-        {
-            View view = hasViews.findViewById(id.toWeather);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
+        if (toWeather!= null) {
+            toWeather.setOnClickListener(new OnClickListener() {
 
 
-                    @Override
-                    public void onClick(View view) {
-                        MainActivity_.this.toWeather();
-                    }
-
+                @Override
+                public void onClick(View view) {
+                    MainActivity_.this.toWeather();
                 }
-                );
+
             }
+            );
         }
+        init();
     }
 
     public static class IntentBuilder_
