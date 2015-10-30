@@ -6,6 +6,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
 import com.example.activity.BaiduMapActivity_;
+import com.example.activity.TestActivity_;
 import com.example.activity.WeatherActivity_;
 
 
@@ -89,7 +90,8 @@ public class MainActivity extends Activity {
 
 	@Click
 	void toWeather() {
-		startActivity(new Intent(MainActivity.this, WeatherActivity_.class));
+//		startActivity(new Intent(MainActivity.this, WeatherActivity_.class));
+		startActivity(new Intent(MainActivity.this, TestActivity_.class));
 	}
 
 	@Click

@@ -49,8 +49,8 @@ public final class WeatherActivity_
     private void init_(Bundle savedInstanceState) {
         OnViewChangedNotifier.registerOnViewChangedListener(this);
         Resources resources_ = this.getResources();
-        searchFailed = resources_.getString(string.search_failed);
         searchCityFailed = resources_.getString(string.search_city_failed);
+        searchFailed = resources_.getString(string.search_failed);
     }
 
     @Override
@@ -81,19 +81,19 @@ public final class WeatherActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        drsg = ((TextView) hasViews.findViewById(id.drsg));
-        pm25 = ((TextView) hasViews.findViewById(id.pm25));
-        drsgLin = ((LinearLayout) hasViews.findViewById(id.drsgLin));
         sport = ((TextView) hasViews.findViewById(id.sport));
-        city = ((TextView) hasViews.findViewById(id.city));
-        qltyLin = ((LinearLayout) hasViews.findViewById(id.qltyLin));
-        lin = ((LinearLayout) hasViews.findViewById(id.lin));
-        fl = ((TextView) hasViews.findViewById(id.fl));
-        sportLin = ((LinearLayout) hasViews.findViewById(id.sportLin));
-        qlty = ((TextView) hasViews.findViewById(id.qlty));
-        pm25Lin = ((LinearLayout) hasViews.findViewById(id.pm25Lin));
-        cond = ((TextView) hasViews.findViewById(id.cond));
+        drsg = ((TextView) hasViews.findViewById(id.drsg));
         et = ((EditText) hasViews.findViewById(id.et));
+        sportLin = ((LinearLayout) hasViews.findViewById(id.sportLin));
+        qltyLin = ((LinearLayout) hasViews.findViewById(id.qltyLin));
+        pm25Lin = ((LinearLayout) hasViews.findViewById(id.pm25Lin));
+        drsgLin = ((LinearLayout) hasViews.findViewById(id.drsgLin));
+        pm25 = ((TextView) hasViews.findViewById(id.pm25));
+        qlty = ((TextView) hasViews.findViewById(id.qlty));
+        cond = ((TextView) hasViews.findViewById(id.cond));
+        fl = ((TextView) hasViews.findViewById(id.fl));
+        lin = ((LinearLayout) hasViews.findViewById(id.lin));
+        city = ((TextView) hasViews.findViewById(id.city));
         {
             View view = hasViews.findViewById(id.btn);
             if (view!= null) {

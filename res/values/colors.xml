@@ -2,4 +2,7 @@
 <resources>
     <color name="white">#ffffffff</color>
     <color name="gary">#272636</color>
+    <color name="desert_background">#f4d08c</color>
+    <color name="desert_moun_left">#da8a4f</color>
+    <color name="desert_moun_right">#e08f54</color>
 </resources>

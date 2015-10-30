@@ -4,7 +4,7 @@
 //
 
 
-package com.example.myandroidannotations;
+package com.example.activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,11 +12,8 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import com.example.myandroidannotations.R.id;
 import com.example.myandroidannotations.R.layout;
 import org.androidannotations.api.builder.ActivityIntentBuilder;
@@ -24,8 +21,8 @@ import org.androidannotations.api.view.HasViews;
 import org.androidannotations.api.view.OnViewChangedListener;
 import org.androidannotations.api.view.OnViewChangedNotifier;
 
-public final class MainActivity_
-    extends MainActivity
+public final class TestActivity_
+    extends TestActivity
     implements HasViews, OnViewChangedListener
 {
 
@@ -37,7 +34,7 @@ public final class MainActivity_
         init_(savedInstanceState);
         super.onCreate(savedInstanceState);
         OnViewChangedNotifier.replaceNotifier(previousNotifier);
-        setContentView(layout.activity_main);
+        setContentView(layout.activity_test);
     }
 
     private void init_(Bundle savedInstanceState) {
@@ -62,60 +59,32 @@ public final class MainActivity_
         onViewChangedNotifier_.notifyViewChanged(this);
     }
 
-    public static MainActivity_.IntentBuilder_ intent(Context context) {
-        return new MainActivity_.IntentBuilder_(context);
+    public static TestActivity_.IntentBuilder_ intent(Context context) {
+        return new TestActivity_.IntentBuilder_(context);
     }
 
-    public static MainActivity_.IntentBuilder_ intent(Fragment supportFragment) {
-        return new MainActivity_.IntentBuilder_(supportFragment);
+    public static TestActivity_.IntentBuilder_ intent(Fragment supportFragment) {
+        return new TestActivity_.IntentBuilder_(supportFragment);
     }
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        textMap = ((TextView) hasViews.findViewById(id.textMap));
-        toMap = ((Button) hasViews.findViewById(id.toMap));
-        textWeather = ((TextView) hasViews.findViewById(id.textWeather));
-        titlebar = ((RelativeLayout) hasViews.findViewById(id.titlebar));
-        toWeather = ((Button) hasViews.findViewById(id.toWeather));
-        if (toWeather!= null) {
-            toWeather.setOnClickListener(new OnClickListener() {
-
-
-                @Override
-                public void onClick(View view) {
-                    MainActivity_.this.toWeather();
-                }
-
-            }
-            );
-        }
-        if (toMap!= null) {
-            toMap.setOnClickListener(new OnClickListener() {
-
-
-                @Override
-                public void onClick(View view) {
-                    MainActivity_.this.toMap();
-                }
-
-            }
-            );
-        }
-        init();
+        background = ((RelativeLayout) hasViews.findViewById(id.background));
+        initView();
     }
 
     public static class IntentBuilder_
-        extends ActivityIntentBuilder<MainActivity_.IntentBuilder_>
+        extends ActivityIntentBuilder<TestActivity_.IntentBuilder_>
     {
 
         private Fragment fragmentSupport_;
 
         public IntentBuilder_(Context context) {
-            super(context, MainActivity_.class);
+            super(context, TestActivity_.class);
         }
 
         public IntentBuilder_(Fragment fragment) {
-            super(fragment.getActivity(), MainActivity_.class);
+            super(fragment.getActivity(), TestActivity_.class);
             fragmentSupport_ = fragment;
         }
 

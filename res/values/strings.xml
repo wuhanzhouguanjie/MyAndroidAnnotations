@@ -29,4 +29,6 @@
     <string name="walk_search">步行</string>
     <string name="custom_icon">自定义起终点图标</string>
     <string name="map_module">地图</string>
+    
+    
 </resources>
