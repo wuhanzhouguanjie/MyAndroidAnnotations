@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="white">#ffffffff</color>
     <color name="gary">#272636</color>
     <color name="desert_background">#f4d08c</color>
     <color name="desert_moun_left">#da8a4f</color>
     <color name="desert_moun_right">#e08f54</color>
+    <color name="red_view">#fa5a36</color>
+    <color name="red_view_press">#c6482b</color>
+    <color name="black_view">#2a343e</color>
+    <color name="about_us">#3d4e5e</color>
+    <color name="blue">#26394a</color>
+    <color name="yellow">#fbdd6b</color>
+    <color name="gray">#b9c9e2</color>
+    <color name="gray_font">#3d4e5d</color>
+    <color name="gray_font_small">#919191</color>
+    <color name="new_gray">#415161</color>
+    <color name="title_blue">#01bbb8</color>
+    <color name="title_blue_press">#00a8a6</color>
+    <color name="m_yellow">#eeeeee</color>
+    
+    <color name="first">#E3BB88</color>
+    <color name="two">#DB9864</color>
+    <color name="three">#B0695A</color>
+    <color name="four">#937E81</color>
+
 </resources>

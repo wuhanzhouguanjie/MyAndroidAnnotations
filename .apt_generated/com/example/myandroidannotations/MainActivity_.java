@@ -73,9 +73,9 @@ public final class MainActivity_
     @Override
     public void onViewChanged(HasViews hasViews) {
         textMap = ((TextView) hasViews.findViewById(id.textMap));
-        toMap = ((Button) hasViews.findViewById(id.toMap));
-        textWeather = ((TextView) hasViews.findViewById(id.textWeather));
         titlebar = ((RelativeLayout) hasViews.findViewById(id.titlebar));
+        textWeather = ((TextView) hasViews.findViewById(id.textWeather));
+        toMap = ((Button) hasViews.findViewById(id.toMap));
         toWeather = ((Button) hasViews.findViewById(id.toWeather));
         if (toWeather!= null) {
             toWeather.setOnClickListener(new OnClickListener() {

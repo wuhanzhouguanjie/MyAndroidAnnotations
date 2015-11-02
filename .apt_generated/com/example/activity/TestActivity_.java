@@ -13,8 +13,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
-import com.example.myandroidannotations.R.id;
+import com.example.adapter.WeatherAdapter_;
+import com.example.adapter.WeatherInfo;
 import com.example.myandroidannotations.R.layout;
 import org.androidannotations.api.builder.ActivityIntentBuilder;
 import org.androidannotations.api.view.HasViews;
@@ -39,6 +44,7 @@ public final class TestActivity_
 
     private void init_(Bundle savedInstanceState) {
         OnViewChangedNotifier.registerOnViewChangedListener(this);
+        adapter = WeatherAdapter_.getInstance_(this);
     }
 
     @Override
@@ -69,7 +75,24 @@ public final class TestActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        background = ((RelativeLayout) hasViews.findViewById(id.background));
+        mSliding = ((LinearLayout) hasViews.findViewById(com.example.myandroidannotations.R.id.mSliding));
+        mListView = ((ListView) hasViews.findViewById(com.example.myandroidannotations.R.id.mListView));
+        background = ((RelativeLayout) hasViews.findViewById(android.R.id.background));
+        {
+            AdapterView<?> view = ((AdapterView<?> ) hasViews.findViewById(com.example.myandroidannotations.R.id.WeatherItemClick));
+            if (view!= null) {
+                view.setOnItemClickListener(new OnItemClickListener() {
+
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        TestActivity_.this.WeatherItemClick(((WeatherInfo) parent.getAdapter().getItem(position)));
+                    }
+
+                }
+                );
+            }
+        }
         initView();
     }
 

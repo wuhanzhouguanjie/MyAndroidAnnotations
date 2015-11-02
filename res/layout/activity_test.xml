@@ -2,20 +2,59 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/white" >
+    android:background="@color/desert_background"
+    android:orientation="vertical" >
 
-    <RelativeLayout
-        android:id="@+id/background"
+
+    <ListView
+        android:id="@+id/mListView"
         android:layout_width="fill_parent"
-        android:layout_height="300dp"
-        android:background="@color/desert_background" >
+        android:layout_height="fill_parent"
+        android:visibility="gone" >
+    </ListView>
 
-        <com.example.ui.MountanScenceView
-            android:id="@+id/mountLeft"
+    <LinearLayout
+        android:id="@+id/mSliding"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@android:color/black"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/lin_1"
+            android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true" />
-    </RelativeLayout>
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/first" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_2"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/two" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_3"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/three" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_4"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/four" >
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>
