@@ -75,9 +75,9 @@ public final class TestActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        mSliding = ((LinearLayout) hasViews.findViewById(com.example.myandroidannotations.R.id.mSliding));
         mListView = ((ListView) hasViews.findViewById(com.example.myandroidannotations.R.id.mListView));
         background = ((RelativeLayout) hasViews.findViewById(android.R.id.background));
+        mSliding = ((LinearLayout) hasViews.findViewById(com.example.myandroidannotations.R.id.mSliding));
         {
             AdapterView<?> view = ((AdapterView<?> ) hasViews.findViewById(com.example.myandroidannotations.R.id.WeatherItemClick));
             if (view!= null) {

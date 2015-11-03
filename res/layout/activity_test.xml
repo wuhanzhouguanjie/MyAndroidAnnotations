@@ -25,7 +25,6 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="1"
             android:background="@color/first" >
         </LinearLayout>
 
@@ -34,7 +33,6 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="1"
             android:background="@color/two" >
         </LinearLayout>
 
@@ -43,7 +41,6 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="1"
             android:background="@color/three" >
         </LinearLayout>
 
@@ -52,7 +49,6 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="1"
             android:background="@color/four" >
         </LinearLayout>
     </LinearLayout>
