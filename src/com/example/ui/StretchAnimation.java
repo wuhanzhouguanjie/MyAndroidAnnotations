@@ -90,7 +90,11 @@ public class StretchAnimation {
 					if (animationlistener != null) {
 						animationlistener.animationEnd(mView);
 					}
+					
+					mHandler.sendEmptyMessageDelayed(2, FRAMTIME);
 				}
+			}else if( msg.what == 2 ){
+				computeViewSize();
 			}
 			super.handleMessage(msg);
 		}
@@ -109,10 +113,10 @@ public class StretchAnimation {
 
 		if (timePassed <= mDuration) {
 			float x = timePassed * mDurationReciprocal;
-			if (mInterpolator != null) {
-				x = mInterpolator.getInterpolation(x);
-			}
-			mCurrSize = mRawSize + Math.round(x * mDSize);
+//			if (mInterpolator != null) {
+//				x = mInterpolator.getInterpolation(x);
+//			}
+			mCurrSize = (int) (mRawSize + x * mDSize)/*Math.round(x * mDSize)*/;
 		} else {
 
 			isFinished = true;
@@ -140,7 +144,7 @@ public class StretchAnimation {
 			} else if (mType == TYPE.horizontal) {
 				mRawSize = mCurrSize = mView.getWidth();
 			}
-			Log.i(TAG, "mRawSize=" + mRawSize);
+			Log.e("AAAAAAAAAAAAAAAAAA", mCurrSize + " " );
 //			if (mCurrSize > mMaxSize || mCurrSize < mMinSize) {
 //				throw new RuntimeException(
 //						"View 的大小不达标 currentViewSize > mMaxSize || currentViewSize < mMinSize");
@@ -152,6 +156,7 @@ public class StretchAnimation {
 			} else {
 				mDSize = mMinSize - mMaxSize;
 			}
+			Log.e("AAAAAAAAAAAAAAAAAA", mCurrSize + " " + mDSize );
 			Log.i(TAG, "mDSize=" + mDSize);
 			mHandler.sendEmptyMessage(1);
 		}

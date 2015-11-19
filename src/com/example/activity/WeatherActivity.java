@@ -1,5 +1,6 @@
 package com.example.activity;
 
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -16,6 +17,8 @@ import com.example.myandroidannotations.R;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -26,9 +29,6 @@ import android.widget.Toast;
 
 public class WeatherActivity extends Activity{
 
-	@ViewById
-	EditText et;
-	
 	//整体信息线性布局
 	@ViewById
 	LinearLayout lin;
@@ -58,25 +58,23 @@ public class WeatherActivity extends Activity{
 	@StringRes(R.string.search_failed)
 	String searchFailed;
 	
-	@Click
-	void btn() {
-		
-		InputMethodManager imm = (InputMethodManager)getSystemService(this.INPUT_METHOD_SERVICE);  
-		//得到InputMethodManager的实例
-		if (imm.isActive()) {
-		//如果开启
-		imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS); 
-		//关闭软键盘，开启方法相同，这个方法是切换开启与关闭状态的
+	@AfterViews
+	void init(){
+		if (android.os.Build.VERSION.SDK_INT > 18) {
+			Window window = getWindow();
+			window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+					WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 		}
 		setProgressBarIndeterminateVisibility(true);
 		someBackgroundWork("weather", 1);
-
 	}
+	
+	
 	
 	@Background
 	void someBackgroundWork(String aParam, long anotherParam){
-		String result = BaseApplication.client.getWeatherInfo
-				(PinyingUtil.hanziToPinyin(et.getText().toString(),""));
+		String result = "wuhan";
+		result = BaseApplication.client.getWeatherInfo(result);
 		updateUi(result);
 	}
 	

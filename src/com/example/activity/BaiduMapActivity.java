@@ -43,6 +43,7 @@ import com.example.myandroidannotations.R;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -73,7 +74,7 @@ public class BaiduMapActivity extends Activity implements
 	private String cityName = null;
 	
 	//搜索相关
-    RoutePlanSearch mSearch = null;    // 搜索模块，也可去掉地图模块独立使用
+    RoutePlanSearch mSearch = null;// 搜索模块，也可去掉地图模块独立使用
 
 	// 定位相关
 	LocationClient mLocClient;
@@ -124,6 +125,7 @@ public class BaiduMapActivity extends Activity implements
         // 初始化搜索模块，注册事件监听
         mSearch = RoutePlanSearch.newInstance();
         mSearch.setOnGetRoutePlanResultListener(this);
+        
 	}
 
 	/**
@@ -146,7 +148,7 @@ public class BaiduMapActivity extends Activity implements
 			
 			
 			cityName = location.getCity();
-			
+			Log.e("-------------->", "location");
 			if (isFirstLoc) {
 				isFirstLoc = false;
 				LatLng ll = new LatLng(location.getLatitude(),

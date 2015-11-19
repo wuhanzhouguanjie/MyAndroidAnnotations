@@ -14,6 +14,7 @@ import com.example.ui.SlidingLayout;
 import com.example.ui.StretchAnimation;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v4.view.GestureDetectorCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -24,14 +25,17 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.BounceInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 @EActivity(R.layout.activity_test)
-public class TestActivity extends Activity {
+public class TestActivity extends Activity implements View.OnClickListener,
+		StretchAnimation.AnimationListener {
 
 	@ViewById
 	ListView mListView;
@@ -57,54 +61,46 @@ public class TestActivity extends Activity {
 	// 显示最长的那个View
 	private View preView;
 
-	private int screenHeight;
 
 	float yDown;
 
 	float yMove;
 
-	private VelocityTracker vt = null;
 
-	private long time1, time2 = 0, timeInterval = 0;
-
-	// 当前最大view id
-	private int currentMax = 0;
-
-	private View currentMaxview;
-	
-	private int touchViewId = 0;
-
-	private GestureDetectorCompat mDetector;
+	private StretchAnimation stretchanimation;
 
 	@AfterViews
 	void initView() {
 
 		mListView.setAdapter(adapter);
 
-		DisplayMetrics metric = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(metric);
-		screenHeight = metric.heightPixels;
-		measureSize(metric.heightPixels);
+//		DisplayMetrics metric = new DisplayMetrics();
+//		getWindowManager().getDefaultDisplay().getMetrics(metric);
+		DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        
+		Log.e("BBBBBBBBBBBBBBBBBBBB", dm.heightPixels+" " + dm.widthPixels+ " ");
+		measureSize(dm.heightPixels);
 
-		// stretchanimation = new StretchAnimation(maxSize, minSize,
-		// StretchAnimation.TYPE.vertical, 500);
-		// // 你可以换不能给的插值器
-		// stretchanimation.setInterpolator(new BounceInterpolator());
-		// // 动画时间
-		// stretchanimation.setDuration(800);
-		// // 回调
-		// stretchanimation.setOnAnimationListener(this);
+		stretchanimation = new StretchAnimation(maxSize, minSize,
+				StretchAnimation.TYPE.vertical, 500);
+		// 你可以换不能给的插值器
+		stretchanimation.setInterpolator(new DecelerateInterpolator ());
+		// 动画时间
+		stretchanimation.setDuration(800);
+		// 回调
+		stretchanimation.setOnAnimationListener(this);
 
 		int childCount = mSliding.getChildCount();
 		View child;
 		LayoutParams params = null;
 		int index = 0;
 		int sizeValue = 0;
-		currentMaxview = mSliding.getChildAt(0);
-		
+
 		for (int i = 0; i < childCount; i++) {
 
 			child = mSliding.getChildAt(i);
+			child.setOnClickListener(this);
 			params = child.getLayoutParams();
 
 			if (i == index) {
@@ -114,46 +110,13 @@ public class TestActivity extends Activity {
 				sizeValue = minSize;
 			}
 			params.height = sizeValue;
-
 			child.setLayoutParams(params);
-
-			child.setOnTouchListener(new OnTouchListener() {
-
-				@Override
-				public boolean onTouch(View v, MotionEvent event) {
-					// TODO Auto-generated method stub
-					for( int i=0;i<mSliding.getChildCount();i++ ){
-						if( mSliding.getChildAt(i) == v ){
-							touchViewId = i;
-							break;
-						}
-					}
-					int[] location = new int[2];
-					v.getLocationOnScreen(location);
-					if( event.getRawY() < (location[1] + v.getHeight()) && event.getRawY() > location[1] ){
-						return mDetector.onTouchEvent(event);
-					}else{
-						return false;
-					}
-					
-
-				}
-			});
 		}
 
-		mDetector = new GestureDetectorCompat(this, new MyGestureListener());
 	}
 
-//	@Override
-//	public boolean onTouchEvent(MotionEvent event) {
-//		mDetector.onTouchEvent(event);
-//		return super.onTouchEvent(event);
-//	}
-
-	
-
-	// 1-上滑 0-下滑
-	private void dealSliding(int type, View v, float distance) {
+	@Override
+	public void onClick(View v) {
 		int id = v.getId();
 		View tempView = null;
 
@@ -178,8 +141,49 @@ public class TestActivity extends Activity {
 		} else {
 			currentView = tempView;
 		}
+		stretchanimation.startAnimation(currentView);
+//		clickEvent(currentView);
+		onOffClickable(false);
+		
+	}
 
-		clickEvent(v.getId(), distance);
+	private void clickEvent(View view) {
+		View child;
+		int childCount = mSliding.getChildCount();
+		LinearLayout.LayoutParams params;
+		for (int i = 0; i < childCount; i++) {
+			child = mSliding.getChildAt(i);
+			if (preView == child) {
+				params = (android.widget.LinearLayout.LayoutParams) child
+						.getLayoutParams();
+
+				if (preView != view) {
+					params.weight = 1.0f;
+					params.height = maxSize;
+				}
+				child.setLayoutParams(params);
+
+			} else {
+				params = (android.widget.LinearLayout.LayoutParams) child
+						.getLayoutParams();
+				params.weight = 0.0f;
+				params.height = minSize;
+				child.setLayoutParams(params);
+			}
+		}
+		preView = view;
+
+	}
+
+	// LinearLayout下所有childView 可点击开关
+	// 当动画在播放时应该设置为不可点击，结束时设置为可点击
+	private void onOffClickable(boolean isClickable) {
+		View child;
+		int childCount = mSliding.getChildCount();
+		for (int i = 0; i < childCount; i++) {
+			child = mSliding.getChildAt(i);
+			child.setClickable(isClickable);
+		}
 	}
 
 	/**
@@ -190,10 +194,10 @@ public class TestActivity extends Activity {
 	 *            从零开始
 	 */
 	private void measureSize(int layoutSize) {
-		int halfWidth = layoutSize / 2;
-		maxSize = halfWidth;
-		minSize = (layoutSize - maxSize) / (mSliding.getChildCount() - 1);
-
+		
+		minSize = (layoutSize/2) / (mSliding.getChildCount() - 1);
+		maxSize = layoutSize - 3*minSize;
+		Log.e("AAAAAAAAAAAAAAAAAA", layoutSize + " " + maxSize + " " + minSize);
 	}
 
 	public int getStatusBarHeight() {
@@ -211,108 +215,15 @@ public class TestActivity extends Activity {
 		Toast.makeText(this, info.temperature, Toast.LENGTH_SHORT).show();
 	}
 
-	private void clickEvent(int viewId, float distance) {
-		// distance 向上是负值，向下是正值
-		View view = findViewById(viewId);
-		View child;
-		int childCount = mSliding.getChildCount();
-		LinearLayout.LayoutParams params;
-		int i = 0;
-		for (; i < childCount; i++) {
-			child = mSliding.getChildAt(i);
-			if (view == child) {
-				// params = (android.widget.LinearLayout.LayoutParams) child
-				// .getLayoutParams();
-				// params.weight = 1.0f;
-				// params.height = maxSize;
-				// child.setLayoutParams(params);
-				// dealTwoViewMove(i, currentMax, distance);
-				break;
-			}
-		}
 
-		// params = (android.widget.LinearLayout.LayoutParams)
-		// mSliding.getChildAt(currentMax)
-		// .getLayoutParams();
-		// params.weight = 0.0f;
-		// params.height = (screenHeight - maxSize) / 3;
-		// mSliding.getChildAt(currentMax).setLayoutParams(params);
 
-		preView = view;
-		currentMax = i;
-	}
-
-	class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
-		private static final String DEBUG_TAG = "Gestures";
-
-		@Override
-		public boolean onDown(MotionEvent event) {
-			return true;
-		}
-
-		@Override
-		public boolean onFling(MotionEvent event1, MotionEvent event2,
-				float velocityX, float velocityY) {
-			return true;
-		}
+	@Override
+	public void animationEnd(View v) {
+		// TODO Auto-generated method stub
+		onOffClickable(true);
 		
-		@Override
-		public boolean onScroll(MotionEvent e1, MotionEvent e2,
-				float distanceX, float distanceY) {
-			// TODO Auto-generated method stub
-			View view = null;
-			view = mSliding.getChildAt(touchViewId);
-			if( touchViewId == 0 ){
-				Log.e("AAAAAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAAAAA");
-			}else if( touchViewId == 1 ){
-				Log.e("BBBBBBBBBBBBBBBBBB", "BBBBBBBBBBBBBBBBBB");
-			}else if( touchViewId == 2 ){
-				Log.e("CCCCCCCCCCCCCCCCCC", "CCCCCCCCCCCCCCCCCC");
-			}else if( touchViewId == 3 ){
-				Log.e("DDDDDDDDDDDDDDDDDD", "DDDDDDDDDDDDDDDDDD");
-			}else{
-				Log.e("DDDDDDDDDDDDDDDDDD", "DDDDDDDDDDDDDDDDDD " + touchViewId);
-			}
-			
-			
-			if( currentMaxview == view ){
-				Log.e("return", "return");
-				return false;
-			}
-			
-			
-			
-//			View view1 = mSliding.getChildAt(0);
-//			View view2 = mSliding.getChildAt(1);
-//			View view3 = mSliding.getChildAt(2);
-//			View view4 = mSliding.getChildAt(3);
-			LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams)view.getLayoutParams();
-			LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams)currentMaxview.getLayoutParams();
-//			LinearLayout.LayoutParams params3 = (LinearLayout.LayoutParams)view3.getLayoutParams();
-//			LinearLayout.LayoutParams params4 = (LinearLayout.LayoutParams)view4.getLayoutParams();
-			int d = (int) distanceY;
-			d = Math.abs(d);
-			params1.height = params1.height - d;
-			params2.height = params2.height + d;
-			
-//			if( params1.height < minSize ){
-//				params1.height = minSize;
-//				params2.height = maxSize;
-//			}
-//			
-//			if( params2.height < minSize ){
-//				params2.height = minSize;
-//				params1.height = maxSize;
-//			}
-			
-			int i = params1.height + params2.height;
-
-			
-			view.setLayoutParams(params2);
-			currentMaxview.setLayoutParams(params1);
-			
-
-			return super.onScroll(e1, e2, distanceX, distanceY);
+		for( int i=0;i<mSliding.getChildCount();i++ ){
+			Log.e("end", " " + mSliding.getChildAt(i).getHeight());
 		}
 	}
 

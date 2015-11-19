@@ -15,9 +15,7 @@ import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.myandroidannotations.R.id;
@@ -81,34 +79,19 @@ public final class WeatherActivity_
 
     @Override
     public void onViewChanged(HasViews hasViews) {
-        pm25Lin = ((LinearLayout) hasViews.findViewById(id.pm25Lin));
-        lin = ((LinearLayout) hasViews.findViewById(id.lin));
-        drsgLin = ((LinearLayout) hasViews.findViewById(id.drsgLin));
-        et = ((EditText) hasViews.findViewById(id.et));
-        sport = ((TextView) hasViews.findViewById(id.sport));
-        sportLin = ((LinearLayout) hasViews.findViewById(id.sportLin));
         pm25 = ((TextView) hasViews.findViewById(id.pm25));
-        drsg = ((TextView) hasViews.findViewById(id.drsg));
+        pm25Lin = ((LinearLayout) hasViews.findViewById(id.pm25Lin));
+        drsgLin = ((LinearLayout) hasViews.findViewById(id.drsgLin));
+        lin = ((LinearLayout) hasViews.findViewById(id.lin));
         qlty = ((TextView) hasViews.findViewById(id.qlty));
-        city = ((TextView) hasViews.findViewById(id.city));
-        cond = ((TextView) hasViews.findViewById(id.cond));
+        sport = ((TextView) hasViews.findViewById(id.sport));
         fl = ((TextView) hasViews.findViewById(id.fl));
+        city = ((TextView) hasViews.findViewById(id.city));
         qltyLin = ((LinearLayout) hasViews.findViewById(id.qltyLin));
-        {
-            View view = hasViews.findViewById(id.btn);
-            if (view!= null) {
-                view.setOnClickListener(new OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        WeatherActivity_.this.btn();
-                    }
-
-                }
-                );
-            }
-        }
+        sportLin = ((LinearLayout) hasViews.findViewById(id.sportLin));
+        cond = ((TextView) hasViews.findViewById(id.cond));
+        drsg = ((TextView) hasViews.findViewById(id.drsg));
+        init();
     }
 
     @Override
